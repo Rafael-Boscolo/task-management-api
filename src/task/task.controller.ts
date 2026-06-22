@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
-import * as taskDto from './task.Dto';
+import * as taskDto from './task.dto';
 import { TaskService } from './task.service';
 
 @Controller('task')
@@ -19,7 +19,7 @@ export class TaskController {
 
     @Get()
     findAll(@Query() params: taskDto.FindAllParameters): taskDto.TaskDto[] {
-        return this.taskService.findByAll(params);
+        return this.taskService.findAll(params);
     }
 
     @Put()
