@@ -8,7 +8,6 @@ export class TaskService {
 
     create(task: TaskDto){
         this.tasks.push(task);
-        // console.log(this.tasks)
     }
 
     findById(id: string): TaskDto {
