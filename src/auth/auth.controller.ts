@@ -13,5 +13,5 @@ export class AuthController {
         return this.authService.singIn(username, password);
     }
 
-    
+
 }
