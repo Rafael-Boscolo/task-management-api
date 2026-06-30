@@ -9,7 +9,9 @@ export class AuthController {
 
     @HttpCode(HttpStatus.OK)
     @Post('login')
-    singIn(@Body('username') username: string, @Body('password') password: string): AuthResponseDto {
+    async singIn(@Body('username') username: string, 
+                @Body('password') password: string
+            ): Promise<AuthResponseDto> {
         return this.authService.singIn(username, password);
     }
 
