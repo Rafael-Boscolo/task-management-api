@@ -23,8 +23,6 @@ export class TaskService {
             status: TaskStatusEnum.TO_DO,
         }
 
-        console.log(taskToSave);
-
         const createdTask = await this.taskRepository.save(taskToSave);
 
         return this.mapEntityToDto(createdTask);
@@ -66,17 +64,13 @@ export class TaskService {
         await this.taskRepository.update(id, this.mapEntityToDto(task))
     }
 
-    remove(id: string) {
-        let taskIndex = this.tasks.findIndex(t => t.id === id);
+    async remove(id: string) {
 
-        console.log(taskIndex);
+        const result = await this.taskRepository.delete(id)
 
-        if(taskIndex >= 0 ) {
-            this.tasks.splice(taskIndex, 1);
-            return;
+        if(!result.affected){
+            throw new HttpException(`This with id ${id} not found.`, HttpStatus.BAD_REQUEST);
         }
-
-        throw new HttpException(`This with id ${id} not found.`, HttpStatus.BAD_REQUEST);
     }
 
     private mapEntityToDto(taskEntity: TaskEntity): TaskDto{
